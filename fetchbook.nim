@@ -33,4 +33,5 @@ proc getFollowerNumber*(): FollowerNumber =
 import std/os
 createDir("doc")
 let number = $getFollowerNumber()
+echo number
 writeFile("doc" / "index.html", number)
