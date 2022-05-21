@@ -31,7 +31,8 @@ proc getFollowerNumber*(): FollowerNumber =
   except: discard
 
 import std/os
-createDir("doc")
+createDir("docs")
 let number = $getFollowerNumber()
 echo number
-writeFile("doc" / "index.html", number)
+createDir("docs/api")
+writeFile("docs/api" / "index.html", number)
