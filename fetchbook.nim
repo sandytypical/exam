@@ -30,4 +30,7 @@ proc getFollowerNumber*(): FollowerNumber =
     result.medium = data["payload"]["references"]["SocialStats"][userId]["usersFollowedByCount"].getInt
   except: discard
 
-writeFile("index.html", $getFollowerNumber())
+import std/os
+createDir("doc")
+let number = $getFollowerNumber()
+writeFile("doc" / "index.html", number)
