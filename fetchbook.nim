@@ -33,4 +33,6 @@ proc getFollowerNumber*(): FollowerNumber =
 import std/os
 let number = $getFollowerNumber()
 echo number
-writeFile("index.html", number)
+import std/times
+let curTime = now()
+writeFile("index.html", "请求时间：" & curTime & "\n" & number)
