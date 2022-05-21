@@ -11,7 +11,7 @@ jobs:
           - ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Cache choosenim
       id: cache-choosenim
@@ -20,14 +20,6 @@ jobs:
         path: ~/.choosenim
         key: ${{ runner.os }}-choosenim-${{ matrix.nim-version}}
 
-    - name: Cache nimble
-      id: cache-nimble
-      uses: actions/cache@v2
-      with:
-        path: ~/.nimble
-        key: ${{ runner.os }}-nimble-${{ matrix.nim-version}}-${{ hashFiles('prologue.nimble') }}
-        restore-keys: |
-          ${{ runner.os }}-nimble-${{ matrix.nim-version}}-
     - name: Setup nim
       uses: jiro4989/setup-nim-action@v1
       with:
