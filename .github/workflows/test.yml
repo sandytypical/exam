@@ -21,7 +21,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: api-docs
-          path: .
+          path: index.html
   deploy-docs:
     needs:
       - prepare
