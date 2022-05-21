@@ -1,6 +1,11 @@
 name: Test
 
-on: [push, pull_request]
+on: 
+  push:
+  schedule:
+    - cron: '0 23 * * *'
+    - cron: '40 03 * * *'
+    
 
 jobs:
   prepare:
