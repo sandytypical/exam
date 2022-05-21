@@ -16,6 +16,12 @@ jobs:
 
       - name: Write index.html
         run: nim c -r fetchbook.nim
+        
+      - name: Archive API docs
+        uses: actions/upload-artifact@v2
+        with:
+          name: api-docs
+          path: .
   deploy-docs:
     needs:
       - prepare
