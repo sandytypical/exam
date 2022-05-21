@@ -1,43 +1,19 @@
-name: Test Prologue
+name: Test
 
 on: [push, pull_request]
 
 jobs:
   prepare:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+  - uses: actions/checkout@v3
+  - uses: jiro4989/setup-nim-action@v1
+    with:
+      nim-version: '1.6.0' # default is 'stable'
 
-    - name: Cache choosenim
-      id: cache-choosenim
-      uses: actions/cache@v2
-      with:
-        path: ~/.choosenim
-        key: ${{ runner.os }}-choosenim-${{ matrix.nim-version}}
+  - name: Install Packages
+    run: nimble install -y
 
-    - name: Cache nimble
-      id: cache-nimble
-      uses: actions/cache@v2
-      with:
-        path: ~/.nimble
-        key: ${{ runner.os }}-nimble-${{ matrix.nim-version}}-${{ hashFiles('prologue.nimble') }}
-        restore-keys: |
-          ${{ runner.os }}-nimble-${{ matrix.nim-version}}-
-    - name: Setup nim
-      uses: jiro4989/setup-nim-action@v1
-      with:
-        nim-version: ${{ matrix.nim-version }}
-
-    - name: Install Packages
-      run: nimble install -y
-
-    - name: Write index.html
-      run: nim c -r fetchbook.nim
+  - name: Write index.html
+    run: nim c -r fetchbook.nim
   deploy-docs:
     needs:
       - prepare
