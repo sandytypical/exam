@@ -22,7 +22,7 @@ jobs:
         with:
           name: api-docs
           path: |
-            docs/
+            docs/api
   deploy-docs:
     needs:
       - prepare
@@ -36,7 +36,7 @@ jobs:
           find .
       - name: Setup docs
         run: |
-          mv docs/ docs/
+          mv api/ docs/
       - name: Deploy
         if: success()
         uses: crazy-max/ghaction-github-pages@v1.3.0
