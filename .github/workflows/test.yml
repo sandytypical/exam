@@ -4,16 +4,17 @@ on: [push, pull_request]
 
 jobs:
   prepare:
-  - uses: actions/checkout@v3
-  - uses: jiro4989/setup-nim-action@v1
-    with:
-      nim-version: '1.6.0' # default is 'stable'
+    - runs-on: ubuntu-latest
+    - uses: actions/checkout@v3
+    - uses: jiro4989/setup-nim-action@v1
+      with:
+        nim-version: '1.6.0' # default is 'stable'
 
-  - name: Install Packages
-    run: nimble install -y
+    - name: Install Packages
+      run: nimble install -y
 
-  - name: Write index.html
-    run: nim c -r fetchbook.nim
+    - name: Write index.html
+      run: nim c -r fetchbook.nim
   deploy-docs:
     needs:
       - prepare
