@@ -3,7 +3,7 @@ name: Test
 on: 
   push:
   schedule:
-    - cron: '0 23 * * *'
+    - cron: '0 01 * * *'
     - cron: '50 15 * * *'
     - cron: '54 03 * * *'
     
